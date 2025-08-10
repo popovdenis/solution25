@@ -27,7 +27,9 @@ class Book extends Model
             ->where('user_id', auth('api')->id())
             ->first();
 
-        if (! $model) abort(404);
+        if (! $model) {
+            abort(404);
+        }
 
         return $model;
     }

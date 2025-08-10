@@ -16,7 +16,7 @@ class BookController extends Controller
         $query = Book::query()->where('user_id', auth('api')->id());
 
         // search (optional)
-        if ($term = trim((string)$r->query('q'))) {
+        if ($term = trim((string) $r->query('q'))) {
             $query->where(function ($q) use ($term) {
                 $q->where('title', 'like', "%{$term}%")->orWhere('author', 'like', "%{$term}%");
             });
@@ -68,6 +68,7 @@ class BookController extends Controller
             $data['cover_path'] = $r->file('cover')->store('covers', 'public');
         }
         $book->update($data);
+
         return new BookResource($book);
     }
 
